@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class Player : Character{
     [SerializeField] private HealthBar _healthBarPrefab;
     private HealthBar _healthBar;
+    [SerializeField] Inventory _inventoryPrefab;
+    private Inventory _inventory;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PickUp"))
@@ -16,7 +18,7 @@ public class Player : Character{
                 switch (hitObject.Type)
                 {
                     case ItemData.ItemType.Coin:
-                        shouldDisappear = true;
+                        shouldDisappear = _inventory.AddItem(hitObject);
                         break;
                     case ItemData.ItemType.Health:
                         shouldDisappear =
@@ -43,6 +45,7 @@ public class Player : Character{
         _hitPoints.Value = _startingHitPoints;
         _healthBar = Instantiate(_healthBarPrefab);
         _healthBar.Character = this;
+        _inventory = Instantiate(_inventoryPrefab);
     }
 
 }

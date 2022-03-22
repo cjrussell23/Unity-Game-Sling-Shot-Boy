@@ -17,8 +17,7 @@ public class SpawnPoint : MonoBehaviour
     {
         if (_prefabToSpawn != null)
         {
-            return Instantiate(_prefabToSpawn, transform.
-            position, Quaternion.identity);
+            return Instantiate(_prefabToSpawn, transform.position, Quaternion.identity);
         }
         return null;
     }

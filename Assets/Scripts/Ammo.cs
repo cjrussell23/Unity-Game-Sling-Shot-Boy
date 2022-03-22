@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int _damageInflicted = 1;
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision is BoxCollider2D)
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            StartCoroutine(enemy.DamageCharacter(_damageInflicted, 0.0f));
+            gameObject.SetActive(false);
+        }
     }
 }

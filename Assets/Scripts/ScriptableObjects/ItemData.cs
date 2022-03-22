@@ -8,7 +8,10 @@ public class ItemData : ScriptableObject
     public enum ItemType
     {
         Coin,
-        Health
+        Health,
+        Emerald,
+        Ruby,
+        Sapphire
     }
     [SerializeField] private string _objectName;
     [SerializeField] private Sprite _sprite;

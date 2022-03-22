@@ -35,8 +35,7 @@ public class Inventory : MonoBehaviour
             if (_items[i] != null && _items[i].Type == itemToAdd.Type && itemToAdd.IsStackable == true)
             {
                 _items[i].Quantity = _items[i].Quantity + 1;
-                Slot slotScript = _slots[i].gameObject.
-                GetComponent<Slot>();
+                Slot slotScript = _slots[i].gameObject.GetComponent<Slot>();
                 Text quantityText = slotScript.QtyText;
                 quantityText.enabled = true;
                 quantityText.text = _items[i].Quantity.ToString();

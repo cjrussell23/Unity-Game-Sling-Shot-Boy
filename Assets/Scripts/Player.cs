@@ -21,9 +21,17 @@ public class Player : Character{
                     case ItemData.ItemType.Coin:
                         shouldDisappear = _inventory.AddItem(hitObject);
                         break;
+                    case ItemData.ItemType.Ruby:
+                        shouldDisappear = _inventory.AddItem(hitObject);
+                        break;
+                    case ItemData.ItemType.Emerald:
+                        shouldDisappear = _inventory.AddItem(hitObject);
+                        break;
+                    case ItemData.ItemType.Sapphire:
+                        shouldDisappear = _inventory.AddItem(hitObject);
+                        break;
                     case ItemData.ItemType.Health:
-                        shouldDisappear =
-                        AdjustHitPoints(hitObject.Quantity);
+                        shouldDisappear = AdjustHitPoints(hitObject.Quantity);
                         break;
                 }
                 if (shouldDisappear)
@@ -36,6 +44,11 @@ public class Player : Character{
         if (_hitPoints.Value < _maxHitPoints)
         {
             _hitPoints.Value = _hitPoints.Value + amount;
+            // When big heart is picked up it adds 10, possibly going over max.
+            if (_hitPoints.Value > _maxHitPoints)
+            {
+                _hitPoints.Value = _maxHitPoints;
+            }
             print("Adjusted HP by: " + amount + ". New value: " + _hitPoints.Value);
             return true;
         }

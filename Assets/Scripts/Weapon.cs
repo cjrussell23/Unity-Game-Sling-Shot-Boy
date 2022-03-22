@@ -12,6 +12,8 @@ public class Weapon : MonoBehaviour
     private float _positiveSlope;
     private float _negativeSlope;
     private Animator _anim;
+    [SerializeField] private float _maxDistance;
+    
     enum Quadrant
     {
         East,
@@ -153,14 +155,23 @@ public class Weapon : MonoBehaviour
     }
     void FireAmmo()
     {
-        Vector3 mousePosition =
-        Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // I spent way too long on this because the z value was throwing off the Vector3.Distance
         GameObject ammo = SpawnAmmo(transform.position);
         if (ammo != null)
         {
             Arc arcScript = ammo.GetComponent<Arc>();
             float travelDuration = 1.0f / _weaponVelocity;
-            StartCoroutine(arcScript.TravelArc(mousePosition, travelDuration));
+            float distance = Vector3.Distance(mousePosition, transform.position);
+            Vector3 reducedMousePosition = transform.position + (mousePosition - transform.position).normalized * _maxDistance;
+            if(distance > _maxDistance)
+            {
+                StartCoroutine(arcScript.TravelArc(reducedMousePosition, travelDuration));
+            }
+            else
+            {
+                StartCoroutine(arcScript.TravelArc(mousePosition, travelDuration));
+            }
         }
     }
 }

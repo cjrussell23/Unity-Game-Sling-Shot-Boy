@@ -6,13 +6,15 @@ public class Arc : MonoBehaviour
     {
         var startPosition = transform.position;
         var percentComplete = 0.0f;
+        //Debug.DrawLine(startPosition, destination, Color.blue, .5f);
+        //destination = Vector3.ClampMagnitude(destination, 50);
+        //Debug.DrawLine(startPosition, destination, Color.red, .5f);
         while (percentComplete < 1.0f)
         {
             percentComplete += Time.deltaTime / duration;
-            //transform.position = Vector3.Lerp(startPosition, destination, percentComplete);
             var currentHeight = Mathf.Sin(Mathf.PI * percentComplete);
-            transform.position = Vector3.Lerp(startPosition, destination,
-            percentComplete) + Vector3.up * currentHeight;
+            transform.position = Vector3.Lerp(startPosition, destination, percentComplete) + Vector3.up * currentHeight;
+
             yield return null;
         }
         gameObject.SetActive(false);

@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections;
 public class Player : Character{
     [SerializeField] private HealthBar _healthBarPrefab;
     private HealthBar _healthBar;
     [SerializeField] Inventory _inventoryPrefab;
+    [SerializeField] protected HitPoints _hitPoints;
     private Inventory _inventory;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,12 +41,41 @@ public class Player : Character{
         }
         return false;
     }
-    void Start()
+    public override IEnumerator DamageCharacter(int damage, float interval)
     {
-        _hitPoints.Value = _startingHitPoints;
+        while (true)
+        {
+            _hitPoints.Value = _hitPoints.Value - damage;
+            if (_hitPoints.Value <= float.Epsilon)
+            {
+                KillCharacter();
+                break;
+            }
+            if (interval > float.Epsilon)
+            {
+                yield return new WaitForSeconds(interval);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    public override void KillCharacter()
+    {
+        base.KillCharacter();
+        Destroy(_healthBar.gameObject);
+        Destroy(_inventory.gameObject);
+    }
+    public override void ResetCharacter()
+    {
+        _inventory = Instantiate(_inventoryPrefab);
         _healthBar = Instantiate(_healthBarPrefab);
         _healthBar.Character = this;
-        _inventory = Instantiate(_inventoryPrefab);
+        _hitPoints.Value = _startingHitPoints;
     }
-
+    private void OnEnable()
+    {
+        ResetCharacter();
+    }
 }

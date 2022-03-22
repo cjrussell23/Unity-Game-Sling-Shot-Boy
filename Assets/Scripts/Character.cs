@@ -1,9 +1,20 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class Character : MonoBehaviour {
     [SerializeField] protected float _maxHitPoints = 10;
-    [SerializeField] protected HitPoints _hitPoints;
+    
     [SerializeField] protected float _startingHitPoints = 5;
+    public enum CharacterCategory
+    {
+        Player,
+        Enemy
+    }
+    public CharacterCategory characterCategory;
+    public virtual void KillCharacter()
+    {
+        Destroy(gameObject);
+    }
     public float MaxHitPoints
     {
         get
@@ -15,4 +26,6 @@ public abstract class Character : MonoBehaviour {
             _maxHitPoints = value;
         }
     }
+    public abstract void ResetCharacter();
+    public abstract IEnumerator DamageCharacter(int damage, float interval);
 }

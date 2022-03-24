@@ -16,4 +16,4 @@ MonoBehaviour:
   _sprite: {fileID: -16793423984005362, guid: 3dbaa4d1edd4680448ecc5de5d6731ab, type: 3}
   _quantity: 0
   _isStackable: 0
-  _itemType: 2
+  _itemType: 4

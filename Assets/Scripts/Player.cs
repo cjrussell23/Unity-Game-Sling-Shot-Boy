@@ -14,7 +14,7 @@ public class Player : Character{
             ItemData hitObject = collision.gameObject.GetComponent<Consumable>().Item;
             if (hitObject != null)
             {
-                print("Hit: " + hitObject.ObjectName);
+                print("Hit: " + hitObject.Type);
                 bool shouldDisappear = false;
                 switch (hitObject.Type)
                 {

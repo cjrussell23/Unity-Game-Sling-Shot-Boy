@@ -23,6 +23,11 @@ public class ConfineCamera : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _confiner.m_BoundingShape2D = _collider;
+            // When the player moves to the last section move the friend to the end.
+            if (gameObject.name == "GroundLayer3")
+            {
+                GameObject.Find("friend").GetComponent<Friend>().Move();
+            }                      
         }
     }
 }

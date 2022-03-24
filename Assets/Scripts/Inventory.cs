@@ -52,4 +52,34 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+    // Check if player has all 3 gems.
+    public bool HasGems()
+    {
+        bool emerald = false;
+        bool ruby = false;
+        bool sapphire = false;
+        for (int i = 0; i < _items.Length; i++)
+        {
+            if(_items[i] != null)           
+            {
+                switch (_items[i].Type)
+                {
+                    case ItemData.ItemType.Emerald:
+                        emerald = true;
+                        break;
+                    case ItemData.ItemType.Ruby:
+                        ruby = true;
+                        break;
+                    case ItemData.ItemType.Sapphire:
+                        sapphire = true;
+                        break;
+                }
+            }        
+        }
+        if (emerald && ruby && sapphire)
+        {
+            return true;
+        }
+        return false;
+    }
 }

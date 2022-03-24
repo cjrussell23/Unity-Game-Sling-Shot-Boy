@@ -28,7 +28,6 @@ public abstract class Character : MonoBehaviour {
     }
     public abstract void ResetCharacter();
     public abstract IEnumerator DamageCharacter(int damage, float interval);
-
     public virtual IEnumerator FlickerCharacter()
     {
         GetComponent<SpriteRenderer>().color = Color.red;

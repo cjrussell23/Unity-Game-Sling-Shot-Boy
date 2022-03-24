@@ -13,7 +13,6 @@ public class Weapon : MonoBehaviour
     private float _negativeSlope;
     private Animator _anim;
     [SerializeField] private float _maxDistance;
-    
     enum Quadrant
     {
         East,

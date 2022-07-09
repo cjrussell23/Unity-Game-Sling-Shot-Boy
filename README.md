@@ -1,4 +1,4 @@
-# Top Down RPG
+# Top Down RPG - Sling Shot Boy
 
 A top down RPG made in unity. It has 3 areas. The goal of the game is to collect 3 gems and bring them to the princess at the end of the last area. There are two types of enemies. The player has a sling shot as a weapon.
 
